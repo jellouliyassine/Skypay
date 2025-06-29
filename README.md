@@ -68,7 +68,7 @@ javac *.java
 # Or compile targeting a specific Java version (e.g., Java 8)
 # javac --release 8 *.java
 java Main
-
+```
 ## Answers for Bonus Section in Problem 2
 
 ### 1. Should all functions be inside the same service? Is it recommended?
