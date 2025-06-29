@@ -1,7 +1,7 @@
 ﻿
 ---
 
-##Banking Service
+##Banking System
 
 ### Description
 A simple banking simulation where a user can:
@@ -68,4 +68,47 @@ javac *.java
 # Or compile targeting a specific Java version (e.g., Java 8)
 # javac --release 8 *.java
 java Main
+
+## Answers for Bonus Section in Problem 2
+
+### 1. Should all functions be inside the same service? Is it recommended?
+
+**Answer:**  
+No, it is not the recommended approach.
+
+Placing all functions in the same `Service` class is **not scalable or maintainable** for larger applications.
+
+#### Problems:
+- **Single Responsibility Violation** (First SOLID principle):  
+  The `Service` class is handling too many responsibilities:
+  - Managing users
+  - Managing rooms
+  - Managing bookings
+
+When a class handles multiple responsibilities, it becomes harder to maintain, test, and extend.
+
+---
+
+### 2. Why does `setRoom()` not impact previous bookings? Is there another way?
+
+**Answer:**  
+In this design, changing a room’s type or price does not affect past bookings in order to preserve the historical accuracy of reservations.  
+When a user books a room, the price and type at the time of booking should be frozen.  
+
+If the system allowed those values to change in past bookings, it would:
+- Corrupt historical data
+- Make the system inconsistent like example: changing the price a user already agreed to pay.
+### Recommended Alternative:
+Instead of storing a direct reference to the room, store  the room’s details at the time of booking.
+
+Example:
+```java
+public class Booking {
+    // Instead of a direct Room reference
+    private int bookedRoomNumber;
+    private RoomType bookedRoomType;
+    private int bookedRoomPrice;
+
+    // These values should be saved at the time of booking
+}
 
